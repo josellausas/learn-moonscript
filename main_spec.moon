@@ -1,45 +1,21 @@
-class Thing
-    name: "unknown"
+file_exists = (filename) ->
+    file = io.open(filename, "r")
+    if (file)
+        file\close!
+        return true
+    return false
 
-class Person extends Thing
-    new: (name) =>
-        @name = name
-    say_name: => print "Hello, I am #{@name}!" 
-
-
-class Number
-    new: (number=0) =>
-        @value = number
-
-class BinConverter
-    new: =>
-        @display = Number!
-    convert: (mode) =>
-        -- Apply the the operation to the number on the display
-        if @display == 0
-            print 0
-        else
-            if mode == 'hex'
-                return string.format("%x", @display)
-
-class Calculator
-    new: =>
-        @display = Number!
+create_file = (filetype, filename) ->
+    handle = assert(io.open(filename .. '.' .. filetype, "wb"))
+    data = "\x41\x41\x41"
+    handle\write data
+    assert(handle\close!)
+    return true
 
 
-describe 'Thing', ->
-    it 'things have names', ->
-        assert.truthy Thing!.name, 'Things should have names'
 
-describe 'Person', ->
-    it 'should have a name', ->
-        p = Person 'Moofasa'
-        assert.equal p.name, 'Moofasa', 'Did not have the same name'
-
-describe 'Binary Converter', ->
-    it 'can convert to hex', ->
-        hex = BinConverter!\convert 'hex'
-        assert.truthy hex
-    it 'can print hex', ->
-        print(string.format "%X", tonumber("41"))
+describe 'File Generator', ->
+    it 'can generate txt files', ->
+        assert.truthy create_file("pdf", "spec_test"), "Create file function call"
+        assert.truthy file_exists("spec_test.pdf"), "File does not exist"
 
