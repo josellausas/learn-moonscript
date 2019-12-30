@@ -1,21 +1,11 @@
-file_exists = (filename) ->
-    file = io.open(filename, "r")
-    if (file)
-        file\close!
-        return true
-    return false
-
-create_file = (filetype, filename) ->
-    handle = assert(io.open(filename .. '.' .. filetype, "wb"))
-    data = "\x41\x41\x41"
-    handle\write data
-    assert(handle\close!)
-    return true
-
-
+FileGen = require('FileGen')
 
 describe 'File Generator', ->
-    it 'can generate txt files', ->
-        assert.truthy create_file("pdf", "spec_test"), "Create file function call"
-        assert.truthy file_exists("spec_test.pdf"), "File does not exist"
+    it 'can generate pdf files', ->
+        assert.truthy FileGen.create_file("pdf", "test"), "Create file function call"
+        assert.truthy FileGen.file_exists("test.pdf"), "File does not exist"
+
+    it 'can generate pdf files', ->
+        assert.truthy FileGen.create_file("txt", "test"), "Create file function call"
+        assert.truthy FileGen.file_exists("test.txt"), "File does not exist"
 
