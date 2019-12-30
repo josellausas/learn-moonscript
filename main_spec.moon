@@ -20,7 +20,7 @@ class BinConverter
             print 0
         else
             if mode == 'hex'
-                return '0x...'
+                return string.format("%x", @display)
 
 class Calculator
     new: =>
@@ -40,3 +40,6 @@ describe 'Binary Converter', ->
     it 'can convert to hex', ->
         hex = BinConverter!\convert 'hex'
         assert.truthy hex
+    it 'can print hex', ->
+        print(string.format "%X", tonumber("41"))
+
