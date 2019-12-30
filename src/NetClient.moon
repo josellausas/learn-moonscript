@@ -1,6 +1,14 @@
 --[[ Netowrk Client ]]
 http = require "socket.http"
 
+_printResponse = (ok, statusCode, statusText, headers) ->
+  print("ok\t", ok)
+  print("statusCode ->" , statusCode)
+  print("statusText ->" , statusText)
+  print("headers:")
+  for i,v in pairs(headers)
+    print("\t", i, v)
+
 get = (url, callback) ->
   data = ""
   ok, statusCode, headers, statusText = http.request {
@@ -11,13 +19,7 @@ get = (url, callback) ->
         data = data .. chunk
       return true
   }
-  print("ok\t", ok)
-  print("statusCode ->" , statusCode)
-  print("statusText ->" , statusText)
-  print("headers:")
-  for i,v in pairs(headers)
-    print("\t", i, v)
-  -- print(data)
+  -- _printResponse(ok, statusCode, statusText, headers)
   if ok
     callback data
   return ok

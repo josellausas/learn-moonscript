@@ -14,10 +14,10 @@ describe 'File Generator', ->
 
 describe 'Network Client', ->
     it 'can get http', ->
-        assert.truthy NetClient.get("http://llau.systems/", (response) -> nil), "http GET call failed"
+        assert.truthy NetClient.get("http://llau.systems/", (content) -> nil), "http GET call failed"
         return
     it 'can get https', ->
-        assert.truthy NetClient.get("https://llau.systems/", (response) -> nil), "secure http GET call failed"
+        assert.truthy NetClient.get("https://llau.systems/", (content) -> nil), "secure http GET call failed"
         return
     it 'can post http', ->
         pending 'Implement HTTP Post'
