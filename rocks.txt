@@ -1,3 +1,2 @@
 moonscript
 busted
-lua-requests
