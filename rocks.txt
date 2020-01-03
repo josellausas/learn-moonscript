@@ -4,3 +4,4 @@ luasocket
 busted
 pgmoon
 inspect
+torch
