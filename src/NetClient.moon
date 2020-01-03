@@ -24,6 +24,20 @@ get = (url, callback) ->
   if ok
     callback data
   return ok
-post = (url, headers, payload) -> nil
+
+post = (url, callback) ->
+  data = ""
+  ok, statusCode, headers, statusText = http.request {
+    method: "POST",
+    :url,
+    sink: (chunk) ->
+      if chunk ~= nil
+        data = data .. chunk
+      return true
+  }
+  _printResponse(ok, statusCode, statusText, headers)
+  if ok
+    callback data
+  return ok
 
 return { :get, :post }

@@ -1,2 +1,5 @@
+vert
 moonscript
+luasocket
 busted
+pgmoon

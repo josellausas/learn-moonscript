@@ -1,7 +1,13 @@
 # learn-moonscript
 Learn Moonscript
+(Osx only for now)
 
-(This has only been tested on osx)
+Learn how to use moonscript as a tool for all your scripting needs by example. 
+
+- Test Driven Development (busted)
+- File Generator (file io)
+- Network Client (socket.http)
+- File Utilities
 
 # Install
 
@@ -11,7 +17,14 @@ Luarocks
 
 ## Luarocks Dependencies
 
-`luarocks install moonscript busted`
+`luarocks install vert`
+`vert --lua-version=5.2 init .venv`
+`source .venv/bin/activate`
+`which luarocks`
+`luarocks install moonscript busted pgmoon luasocket`
+
+## Lua Notebooks
+`pip install jupyter` and `pip install ilua`
 
 # Build 
 
@@ -26,6 +39,9 @@ Compile all files in `src/` into `build/`
 Add the -w flag:
 
 `moonc -w -t "build/" "src/"`
+
+# Run Notebooks
+Run : `jupyter notebook`
 
 # Test
 
