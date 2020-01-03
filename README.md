@@ -17,13 +17,22 @@ Luarocks
 
 ## Luarocks Dependencies
 
+### Install virtual env lua
 `luarocks install vert`
-`vert --lua-version=5.2 init .venv`
-`source .venv/bin/activate`
+`vert make dev --lua-version=5.2.4`
+`source ~/.verts/dev/bin/activate`
 `which luarocks`
-`luarocks install moonscript busted pgmoon luasocket`
 
-## Lua Notebooks
+### Install ssl
+`luarocks install luasec OPENSSL_DIR=/usr/local/opt/openssl@1.1`
+
+### Install deps
+`luarocks install luasocket`
+`luarocks install moonscript`
+`luarocks install busted`
+`luarocks install pgmoon`
+
+### Install Lua Notebooks
 `pip install jupyter` and `pip install ilua`
 
 # Build 
