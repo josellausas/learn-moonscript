@@ -3,6 +3,8 @@ NetClient = require('src.NetClient')
 DB = require('src.Database')
 Time = require('src.Time')
 
+-- TODO: seed random
+
 API_URL = "http://llau.systems/"
 
 describe 'Secrets Manager', ->
@@ -52,4 +54,42 @@ describe 'Database Client', ->
 describe 'Time Client', ->
     it 'can get ntp time', ->
         assert.truthy Time.get_ntp_time!
+        return
+
+describe 'Fuzzer', ->
+    get_fuzz_string = (length, percent) ->
+        bad_chars = {
+            '\x00',
+            '\x1D',
+            '\x13',
+            '\'',
+            '\"',
+            '\n',
+        }
+        if percent > 100
+            percent = 100
+        if percent < 0
+            percent = 0
+        math.randomseed(os.clock())
+        build_string = ""
+        for i = 1, length
+            random_num = math.random() * 100
+            if random_num <= percent
+                -- Insert a 'dangerous' char
+                random_index = math.floor(math.random(1, #bad_chars))
+                print("Index: " .. random_index)
+                danger_char = bad_chars[random_index]
+                build_string = build_string .. danger_char
+            else
+                build_string = build_string .. '\x41'
+        return build_string
+
+    it 'can generate fuzz strings', ->
+        naughty_string = get_fuzz_string 100, 50 -- 10 chars, 50% naughty
+        print(naughty_string)
+        assert.equal 100, #naughty_string
+
+describe 'k9', ->
+    it 'can find forms withour csrf', ->
+        pending "Implement Secret Manager"
         return
