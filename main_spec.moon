@@ -1,6 +1,7 @@
 FileGen = require('src.FileGen')
 NetClient = require('src.NetClient')
 DB = require('src.Database')
+Time = require('src.Time')
 
 API_URL = "http://llau.systems/"
 
@@ -46,4 +47,9 @@ describe 'Network Client', ->
 describe 'Database Client', ->
     it 'can create database entries', ->
         assert.truthy DB.log_msg(0, "Ran database tests")
+        return
+
+describe 'Time Client', ->
+    it 'can get ntp time', ->
+        assert.truthy Time.get_ntp_time!
         return

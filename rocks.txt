@@ -3,3 +3,4 @@ moonscript
 luasocket
 busted
 pgmoon
+inspect
