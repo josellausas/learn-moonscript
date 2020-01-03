@@ -77,7 +77,6 @@ describe 'Fuzzer', ->
             if random_num <= percent
                 -- Insert a 'dangerous' char
                 random_index = math.floor(math.random(1, #bad_chars))
-                print("Index: " .. random_index)
                 danger_char = bad_chars[random_index]
                 build_string = build_string .. danger_char
             else
@@ -86,10 +85,33 @@ describe 'Fuzzer', ->
 
     it 'can generate fuzz strings', ->
         naughty_string = get_fuzz_string 100, 50 -- 10 chars, 50% naughty
-        print(naughty_string)
         assert.equal 100, #naughty_string
 
 describe 'k9', ->
     it 'can find forms withour csrf', ->
-        pending "Implement Secret Manager"
+        pending 'Implement k9 csrf form finder'
+        return
+
+describe 'AI Tools', ->
+    torch = require 'torch'
+    -- create the quadratic form
+    gen_postive_definite_quadratic_form = (dimmension = 5) ->
+        torch.manualSeed(1234)
+        -- choose a dimension
+        N = dimmension
+        -- create a random NxN matrix
+        A = torch.rand(N, N)
+        -- make it symmetric positive
+        A = A*A\t!
+        -- make it definite
+        A\add 0.001, torch.eye N
+
+        -- add a linear term
+        b = torch.rand N
+        J = (x) ->
+            return 0.5*x\dot(A*x)-b\dot(x)
+        return J(torch.rand(dimmension))
+
+    it 'can load some 1337 ai tools', ->
+        assert.true(gen_postive_definite_quadratic_form! > 0)
         return
