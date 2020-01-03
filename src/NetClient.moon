@@ -2,14 +2,15 @@
 http = require "socket.http"
 
 _printResponse = (ok, statusCode, statusText, headers) ->
-  -- print("ok\t", ok)
-  -- print("statusCode ->" , statusCode)
-  -- print("statusText ->" , statusText)
-  -- print("headers:")
-  -- for i,v in pairs(headers)
-  --   print("\t", i, v)
-  nil
+  print("ok\t", ok)
+  print("statusCode ->" , statusCode)
+  print("statusText ->" , statusText)
+  print("headers:")
+  for i,v in pairs(headers)
+    print("\t", i, v)
 
+
+-- HTTP GET
 get = (url, callback) ->
   data = ""
   ok, statusCode, headers, statusText = http.request {
@@ -20,11 +21,12 @@ get = (url, callback) ->
         data = data .. chunk
       return true
   }
-  _printResponse(ok, statusCode, statusText, headers)
+  -- _printResponse(ok, statusCode, statusText, headers)
   if ok
     callback data
   return ok
 
+-- HTTP POST
 post = (url, callback) ->
   data = ""
   ok, statusCode, headers, statusText = http.request {
@@ -35,7 +37,7 @@ post = (url, callback) ->
         data = data .. chunk
       return true
   }
-  _printResponse(ok, statusCode, statusText, headers)
+  -- _printResponse(ok, statusCode, statusText, headers)
   if ok
     callback data
   return ok
