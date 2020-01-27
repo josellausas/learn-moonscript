@@ -113,5 +113,11 @@ describe 'AI Tools', ->
         return J(torch.rand(dimmension))
 
     it 'can load some 1337 ai tools', ->
-        assert.true(gen_postive_definite_quadratic_form! > 0)
+        assert.truthy gen_postive_definite_quadratic_form!
         return
+
+describe 'Coroutines', ->
+    Hive = require 'src.WorkerHive'
+    it 'can multithread', ->
+        assert.truthy Hive
+        return Hive.make_bees_work!
